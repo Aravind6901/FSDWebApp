@@ -32,14 +32,13 @@ namespace FSDWebApp.Controllers
         [HttpPost]
         public ActionResult Create(GigFromViewModel viewModel)
         {
-            var artistid = User.Identity.GetUserId();
-            var artist = _context.Users.Single(u => u.Id == artistid);
-            var genre = _context.Genres.Single(g => g.Id == viewModel.Genre);
+            //var artist = _context.Users.Single(u => u.Id == artistid);
+            //var genre = _context.Genres.Single(g => g.Id == viewModel.Genre);
             var gig = new Gig
             {
-                Artist = artist,
+                ArtistId = User.Identity.GetUserId(),
                 DateTime = DateTime.Parse(string.Format("{0} {1}", viewModel.Date, viewModel.Time)),
-                Genre = genre,
+                GenreId = viewModel.Genre,
                 Venue = viewModel.Venue
             };
             _context.Gigs.Add(gig);
